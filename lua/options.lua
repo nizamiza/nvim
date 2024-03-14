@@ -1,32 +1,33 @@
-local set_option = function (key, value)
-  vim.opt[key] = value
-end
+local helpers = require("helpers")
 
 -- Line numbers
-set_option("number", true)
-set_option("relativenumber", true)
+helpers.set_option("number", true)
+helpers.set_option("relativenumber", true)
 
 -- Indentation
-set_option("tabstop", 2)
-set_option("shiftwidth", 2)
-set_option("expandtab", true)
+helpers.set_option("tabstop", 2)
+helpers.set_option("shiftwidth", 2)
+helpers.set_option("expandtab", true)
 
 -- Mouse
-set_option("mouse", "a")
+helpers.set_option("mouse", "a")
 
 -- Undo
-set_option("undofile", true)
+helpers.set_option("undofile", true)
+
+-- Swap files
+helpers.set_option("swapfile", false)
 
 -- Search
-set_option("hlsearch", true)
-set_option("incsearch", true)
-set_option("ignorecase", true)
-set_option("smartcase", true)
+helpers.set_option("hlsearch", true)
+helpers.set_option("incsearch", true)
+helpers.set_option("ignorecase", true)
+helpers.set_option("smartcase", true)
 
 -- Update time
-set_option("updatetime", 250)
-set_option("timeoutlen", 300)
+helpers.set_option("updatetime", 250)
+helpers.set_option("timeoutlen", 300)
 
 -- Scroll off
-set_option("scrolloff", 10)
+helpers.set_option("scrolloff", 10)
 
