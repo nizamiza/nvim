@@ -30,4 +30,3 @@ helpers.set_option("timeoutlen", 300)
 
 -- Scroll off
 helpers.set_option("scrolloff", 10)
-

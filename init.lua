@@ -5,6 +5,7 @@ vim.g.maplocalleader = " "
 -- Load plugins
 vim.cmd("packloadall")
 
-require("helpers")
 require("options")
+require("statusline")
+require("remaps")
 require("plugins")
