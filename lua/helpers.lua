@@ -1,8 +1,12 @@
-local set_option = function(key, value)
+local function set_option(key, value)
   vim.opt[key] = value
 end
 
-local set_keymap = function(key, value, opts)
+local function set_global_option(key, value)
+  vim.g[key] = value
+end
+
+local function set_keymap(key, value, opts)
   opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
 
   local mode = opts.mode or "n"
@@ -13,5 +17,6 @@ end
 
 return {
   set_option = set_option,
+  set_global_option = set_global_option,
   set_keymap = set_keymap
 }

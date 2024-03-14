@@ -1,8 +1,8 @@
 local helpers = require("helpers")
 
 -- Prettier
-vim.g["prettier#autoformat"] = 1
-vim.g["prettier#autoformat_require_pragma"] = 0
+helpers.set_global_option("prettier#autoformat", 1)
+helpers.set_global_option("prettier#autoformat_require_pragma", 0)
 
 -- Treesitter
 require("nvim-treesitter.configs").setup({
