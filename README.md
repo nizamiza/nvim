@@ -1,16 +1,16 @@
 # My Personal NeoVim Configuration
 
-Very simple configuration of NeoVim using built-in package manager. I use Copilot as a completion engine without any LSPs. Goal is to have a very clean and editing focused environment.
+Very simple configuration of NeoVim using built-in package manager. I use [Copilot](https://github.com/features/copilot) as a completion engine without any LSPs. Goal is to have a very clean and editing focused environment.
 
 ## Installation
 
-Before you start, make sure that you have installed NeoVim and Git on your system. Then, backup your current configuration if you have any:
+Before you start, make sure that you have installed [NeoVim](https://neovim.io) and [Git](https://http://git-scm.com) on your system. Then, backup your current configuration if you have any:
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
 ```
 
-Then, clone this repository to your `~/.config` directory:
+Clone this repository into your `~/.config` directory:
 
 ```bash
 git clone https://github.com/nizamiza/nvim.git ~/.config/nvim
@@ -18,18 +18,23 @@ git clone https://github.com/nizamiza/nvim.git ~/.config/nvim
 
 ## Installing Plugins
 
-Since I use the built-in package manager, you need to install the plugins manually. You can do so by cloning the repositories to the `~/.config/nvim/pack/plugins/start` directory. For example, to install Copilot:
+Although I use built-in package manager, I have a rudimentary package manager implemented in [`lua/plugins/init.lua`](lua/plugins/init.lua).
 
-```bash
-git clone https://github.com/github/copilot.vim.git \
-  ~/.config/nvim/pack/github/start/copilot.vim
-```
+### To install a plugin:
 
-## List of used plugins
+1. Add plugin name in `github-user/repo-name` format to the list in [`lua/plugins/list.lua`](lua/plugins/list.lua).
+2. Restart NeoVim.
+3. Run `:PluginInstall <plugin-name>` to install the plugin. Alternlatively, run `:PluginInstallAll` to install all plugins.
 
-- [copilot.vim](https://github.com/github/copilot.vim)
-- [plenar.nvim](https://github.com/nvim-lua/plenary.nvim)
-- [treesitter.nvim](https://github.com/nvim-treesitter/nvim-treesitter)
-- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-- [vim-prettier](https://github.com/prettier/vim-prettier)
-- [which-key.nvim](https://github.com/folke/which-key.nvim)
+### To update a plugin:
+
+1. Run `:PluginUpdate <plugin-name>` or `:PluginUpdateAll` to update all plugins.
+
+### To delete a plugin:
+
+1. Run `:PluginDelete <plugin-name>`.
+
+### Configuring Plugins
+
+All plugin configurations are located in [`lua/plugins/config.lua`](lua/plugins/config.lua).
+

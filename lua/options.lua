@@ -16,6 +16,9 @@ helpers.set_option("tabstop", 2)
 helpers.set_option("shiftwidth", 2)
 helpers.set_option("expandtab", true)
 
+-- Disable soft wrap
+helpers.set_option("wrap", false)
+
 -- Alllow using mouse
 helpers.set_option("mouse", "a")
 
