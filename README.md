@@ -22,9 +22,9 @@ Although I use built-in package manager, I have a rudimentary package manager im
 
 ### To install a plugin:
 
-1. Add plugin name in `github-user/repo-name` format to the list in [`lua/plugins/list.lua`](lua/plugins/list.lua).
+1. Add the plugin name in `github-user/repo-name` format to the list in [`lua/plugins/list.lua`](lua/plugins/list.lua).
 2. Restart NeoVim.
-3. Run `:PluginInstall <plugin-name>` to install the plugin. Alternlatively, run `:PluginInstallAll` to install all plugins.
+3. Run `:PluginInstall <plugin-name>` to install the plugin. Alternatively, run `:PluginInstallAll` to install all plugins.
 
 ### To update a plugin:
 
