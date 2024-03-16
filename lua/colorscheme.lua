@@ -12,4 +12,4 @@ vim.api.nvim_create_autocmd({ "ColorSchemePre", "CursorHold", "FocusGained" }, {
 })
 
 helpers.set_option("termguicolors", true)
-vim.cmd("colorscheme modus")
+

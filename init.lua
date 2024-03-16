@@ -2,7 +2,7 @@
 vim.cmd("packloadall")
 
 require("options")
-require("plugins")
+require("rpm")
 require("colorscheme")
 require("statusline")
 require("remaps")
