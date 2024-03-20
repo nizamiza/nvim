@@ -1,3 +1,3 @@
 return {
-  "nizamiza/rpm",
+  "nizamiza/rpm"
 }
