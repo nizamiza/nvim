@@ -11,10 +11,13 @@ helpers.set_option("clipboard", "unnamedplus")
 helpers.set_option("number", true)
 helpers.set_option("relativenumber", true)
 
--- Setup indentation
+-- Set indentation
 helpers.set_option("tabstop", 2)
 helpers.set_option("shiftwidth", 2)
 helpers.set_option("expandtab", true)
+
+-- Set ruler
+helpers.set_option("colorcolumn", "80")
 
 -- Disable soft wrap
 helpers.set_option("wrap", false)
