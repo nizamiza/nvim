@@ -19,6 +19,9 @@ helpers.set_option("expandtab", true)
 -- Set ruler
 helpers.set_option("colorcolumn", "80")
 
+-- Highlight current line
+helpers.set_option("cursorline", true)
+
 -- Disable soft wrap
 helpers.set_option("wrap", false)
 
