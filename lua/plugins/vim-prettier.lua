@@ -19,10 +19,6 @@ return {
     helpers.set_global_option("prettier#autoformat", 1)
     helpers.set_global_option("prettier#autoformat_require_pragma", 0)
 
-    helpers.set_keymap("<leader>p", "<cmd>PrettierAsync<cr>", {
-      desc = "Format with Prettier"
-    })
-
     -- cmd for formatting the current line or visual selection
     vim.api.nvim_create_user_command(
       "PS",
@@ -52,6 +48,21 @@ return {
         -- restore indent 
         for i, line in ipairs(formatted_lines) do
           formatted_lines[i] = string.rep(" ", indent) .. line
+        end
+
+        -- if the length of the formatted lines is different from the original
+        -- lines we need to adjust the range_end and preserve the content after
+        -- the range_end
+        local diff = #formatted_lines - #lines
+
+        if diff > 0 then
+          local rest_of_lines = vim.fn.getline(range_end + 1, range_end + diff)
+
+          for i, line in ipairs(rest_of_lines) do
+            table.insert(formatted_lines, line)
+          end
+
+          range_end = range_end + diff
         end
 
         vim.fn.setline(range_start, formatted_lines)

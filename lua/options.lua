@@ -18,6 +18,7 @@ helpers.set_option("expandtab", true)
 
 -- Set ruler
 helpers.set_option("colorcolumn", "80")
+helpers.set_option("textwidth", 80)
 
 -- Highlight current line
 helpers.set_option("cursorline", true)

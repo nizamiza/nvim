@@ -13,12 +13,13 @@ return {
       },
     })
 
-    helpers.set_keymap("<leader>f", builtin.find_files, { desc = "Find files" })
-    helpers.set_keymap("<leader>g", builtin.live_grep, { desc = "Live grep" })
-    helpers.set_keymap("<leader>b", builtin.buffers, { desc = "Buffers" })
-    helpers.set_keymap("<leader>h", builtin.help_tags, { desc = "Help tags" })
-    helpers.set_keymap("<leader>o", builtin.oldfiles, { desc = "Old files" })
-    helpers.set_keymap("<leader>i", builtin.git_status, { desc = "Git status" })
-    helpers.set_keymap("<leader>m", builtin.git_commits, { desc = "Git commits" })
+    helpers.set_keymap("<leader>fp", builtin.find_files, { desc = "Find project files" })
+    helpers.set_keymap("<leader>lg", builtin.live_grep, { desc = "Live grep" })
+    helpers.set_keymap("<leader>bl", builtin.buffers, { desc = "Buffer list" })
+    helpers.set_keymap("<leader>ht", builtin.help_tags, { desc = "Help tags" })
+    helpers.set_keymap("<leader>sr", builtin.resume, { desc = "Resume previous search" })
+    helpers.set_keymap("<leader>of", builtin.oldfiles, { desc = "Old files" })
+    helpers.set_keymap("<leader>gi", builtin.git_status, { desc = "Git info" })
+    helpers.set_keymap("<leader>gc", builtin.git_commits, { desc = "Git commits" })
   end
 }
