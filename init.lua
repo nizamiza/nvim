@@ -13,6 +13,7 @@ local cs = require("colorscheme")
 require("options")
 require("statusline")
 require("remaps")
+require("user_commands")
 
 -- Initialize the plugin manager and plugins
 require("rpm")
