@@ -1,5 +1,6 @@
 function delete_other_buffers(opts)
-  local force = opts.fargs[1] == "force"
+  local initial_force = opts.fargs[1] == "force"
+  local force = initial_force
   local current_buf = vim.api.nvim_get_current_buf()
 
   local count = 0
@@ -33,6 +34,8 @@ function delete_other_buffers(opts)
 
     vim.api.nvim_buf_delete(buf, { force = force })
     count = count + 1
+
+    force = initial_force
 
     ::continue::
   end

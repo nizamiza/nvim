@@ -43,8 +43,8 @@ helpers.set_option("ignorecase", true)
 helpers.set_option("smartcase", true)
 
 -- Setup update time
-helpers.set_option("updatetime", 250)
-helpers.set_option("timeoutlen", 300)
+helpers.set_option("updatetime", 50)
+helpers.set_option("timeoutlen", 100)
 
 -- Set scroll off
 helpers.set_option("scrolloff", 10)
