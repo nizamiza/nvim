@@ -20,5 +20,6 @@ require("rpm")
 require("rpm.interface").setup({
   after_init = function()
     cs.set_colorscheme()
+    require("lsp")
   end
 })

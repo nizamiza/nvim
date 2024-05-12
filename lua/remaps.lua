@@ -12,3 +12,4 @@ helpers.set_keymap("<leader>w", "<cmd>set wrap!<cr>", { desc = "Toggle soft wrap
 
 -- Invoke netrw
 helpers.set_keymap("<leader>e", "<cmd>Explore<cr>", { desc = "Invoke netrw" })
+
