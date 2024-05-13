@@ -106,7 +106,7 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert({
     -- Confirm completion
-    ["<c-y>"] = cmp.mapping.confirm({ select = false }),
+    ["<cr>"] = cmp.mapping.confirm({ select = false }),
 
     -- Cancel completion
     ["<c-e>"] = cmp.mapping.close(),

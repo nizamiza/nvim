@@ -12,9 +12,9 @@ local function set_keymap(key, value, opts)
   local mode = opts.mode or "n"
   opts.mode = nil
 
-  mode = type(mode) == "table" and mode or { mode }
+  local modes = type(mode) == "table" and mode or { mode }
 
-  for _, m in ipairs(mode) do
+  for _, m in ipairs(modes) do
     vim.keymap.set(m, key, value, opts)
   end
 end
