@@ -1,7 +1,8 @@
+local utils = require("utils")
+
 return {
   "prettier/vim-prettier",
   function()
-    local helpers = require("helpers")
     local autocomplete = require("rpm.autocomplete")
 
     local parser_select_options = {
@@ -16,8 +17,8 @@ return {
       "html"
     }
 
-    helpers.set_global_option("prettier#autoformat", 1)
-    helpers.set_global_option("prettier#autoformat_require_pragma", 0)
+    utils.set_global_option("prettier#autoformat", 1)
+    utils.set_global_option("prettier#autoformat_require_pragma", 0)
 
     -- cmd for formatting the current line or visual selection
     vim.api.nvim_create_user_command(
@@ -45,7 +46,7 @@ return {
 
         local formatted_lines = vim.fn.readfile(temp_file)
 
-        -- restore indent 
+        -- restore indent
         for i, line in ipairs(formatted_lines) do
           formatted_lines[i] = string.rep(" ", indent) .. line
         end

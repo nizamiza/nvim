@@ -1,8 +1,12 @@
-local helpers = require("helpers")
+local utils = require("utils")
 
 return {
   "folke/zen-mode.nvim",
   function()
-    helpers.set_keymap("<leader>z", "<cmd>ZenMode<cr>", { desc = "Toggle zen mode" })
+    utils.set_keymap(
+      "<leader>z",
+      "<cmd>ZenMode<cr>",
+      { desc = "Toggle zen mode" }
+    )
   end
 }

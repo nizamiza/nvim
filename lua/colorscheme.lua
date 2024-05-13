@@ -1,18 +1,80 @@
-local helpers = require("helpers")
+local utils = require("utils")
 
-local color_scheme = {
-  dark = "github_dark_high_contrast",
-  light = "github_light_high_contrast"
+local M = {}
+
+M.color_scheme = {
+  dark = "github_dark",
+  light = "github_light",
+  statusline = {
+    dark = {
+      guifg = "black",
+      guibg = {
+        "palevioletred",
+        "coral",
+        "khaki",
+        "plum",
+        "lightsteelblue",
+        "tan",
+        "cadetblue",
+        "goldenrod"
+      },
+    },
+    light = {
+      guifg = "white",
+      guibg = {
+        "rebeccapurple",
+        "firebrick",
+        "forestgreen",
+        "midnightblue",
+        "darkolivegreen",
+        "navy",
+        "darkgreen",
+      }
+    }
+  }
+}
+
+M.weekdays = {
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
 }
 
 local init_colorscheme = vim.api.nvim_create_augroup("init_colorscheme", {})
 local adaptive_colorscheme = vim.g.adaptive_colorscheme
 
-local function set_colorscheme(bg_color)
+function M.set_statusline_colorscheme(wday, bg_color)
+  wday = wday or os.date("*t").wday
   bg_color = bg_color or vim.o.background
 
-  helpers.set_option("background", bg_color)
-  vim.cmd("colorscheme " .. color_scheme[bg_color])
+  if type(wday) == "string" then
+    for index, day in ipairs(M.weekdays) do
+      if day == wday then
+        wday = index
+        break
+      end
+    end
+  end
+
+  local statusline_cs = M.color_scheme.statusline[bg_color]
+
+  local fg = statusline_cs.guifg
+  local bg = statusline_cs.guibg[wday % #statusline_cs.guibg + 1]
+
+  vim.cmd("hi StatusLine guifg=" .. fg .. " guibg=" .. bg)
+end
+
+function M.set_colorscheme(bg_color)
+  bg_color = bg_color or vim.o.background
+
+  utils.set_option("background", bg_color)
+  vim.cmd("colorscheme " .. M.color_scheme[bg_color])
+
+  M.set_statusline_colorscheme()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained" }, {
@@ -27,16 +89,14 @@ vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained" }, {
       "defaults read -g AppleInterfaceStyle &> /dev/null"
     ) == 0 and "dark" or "light"
 
-    set_colorscheme(bg_color)
+    M.set_colorscheme(bg_color)
   end
 })
 
-helpers.set_option("termguicolors", true)
+utils.set_option("termguicolors", true)
 
 if not adaptive_colorscheme then
-  set_colorscheme("dark")
+  M.set_colorscheme("dark")
 end
 
-return {
-  set_colorscheme = set_colorscheme
-}
+return M

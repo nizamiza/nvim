@@ -1,11 +1,10 @@
-local helpers = require("helpers") 
+local utils = require("utils")
 
 return {
   "folke/which-key.nvim",
   function()
-
-    helpers.set_option("timeout", true);
-    helpers.set_option("timeoutlen", 500)
+    utils.set_option("timeout", true);
+    utils.set_option("timeoutlen", 500)
 
     require("which-key").setup()
   end

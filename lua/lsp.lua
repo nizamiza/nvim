@@ -4,19 +4,19 @@
 -- https://lsp-zero.netlify.app/v3.x/blog/you-might-not-need-lsp-zero.html
 --
 
-local helpers = require("helpers")
+local utils = require("utils")
 local telescope = require("telescope.builtin")
 
 -- Global LSP keybindings
-helpers.set_keymap("gl", "<cmd>lua vim.diagnostic.open_float()<cr>", {
+utils.set_keymap("gl", "<cmd>lua vim.diagnostic.open_float()<cr>", {
   desc = "Open diagnostic float"
 })
 
-helpers.set_keymap("úd", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {
+utils.set_keymap("úd", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {
   desc = "Go to previous diagnostic"
 })
 
-helpers.set_keymap("äd", "<cmd>lua vim.diagnostic.goto_next()<cr>", {
+utils.set_keymap("äd", "<cmd>lua vim.diagnostic.goto_next()<cr>", {
   desc = "Go to next diagnostic"
 })
 
@@ -42,41 +42,58 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local get_opts = lsp_keymap_opts_factory(event)
     local lsp_action = telescope_lsp_action_factory()
 
-    helpers.set_keymap("<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", get_opts({
-      desc = "Rename symbol"
-    }))
-
-    helpers.set_keymap("ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", get_opts({
-      desc = "Show code actions"
-    }))
-
-    helpers.set_keymap("K", "<cmd>lua vim.lsp.buf.hover()<cr>", get_opts({
-      desc = "Show hover information"
-    }))
-
-    helpers.set_keymap("gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", get_opts({
-      desc = "Show signature help"
-    }))
-
-    helpers.set_keymap("gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", get_opts({
-      desc = "Go to declaration"
-    }))
-
-    helpers.set_keymap("gd", lsp_action("definitions"), get_opts({
-      desc = "Go to definition"
-    }))
-
-    helpers.set_keymap("gi", lsp_action("implementations"), get_opts({
-      desc = "Go to implementation"
-    }))
-
-    helpers.set_keymap("go", lsp_action("type_definitions"), get_opts({
-      desc = "Go to type definition"
-    }))
-
-    helpers.set_keymap("gr", lsp_action("references"), get_opts({
-      desc = "Show references"
-    }))
+    utils.set_keymaps({
+      {
+        "<leader>r",
+        "<cmd>lua vim.lsp.buf.rename()<cr>",
+        get_opts({ desc = "Rename symbol" }),
+      },
+      {
+        "<leader>L",
+        "<cmd>lua vim.lsp.buf.format({ async = true })<cr>",
+        get_opts({ desc = "Format document" }),
+      },
+      {
+        "ca",
+        "<cmd>lua vim.lsp.buf.code_action()<cr>",
+        get_opts({ desc = "Show code actions" }),
+      },
+      {
+        "K",
+        "<cmd>lua vim.lsp.buf.hover()<cr>",
+        get_opts({ desc = "Show hover information" }),
+      },
+      {
+        "gs",
+        "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+        get_opts({ desc = "Show signature help" }),
+      },
+      {
+        "gD",
+        "<cmd>lua vim.lsp.buf.declaration()<cr>",
+        get_opts({ desc = "Go to declaration" }),
+      },
+      {
+        "gd",
+        lsp_action("definitions"),
+        get_opts({ desc = "Go to definition" }),
+      },
+      {
+        "gi",
+        lsp_action("implementations"),
+        get_opts({ desc = "Go to implementation" }),
+      },
+      {
+        "go",
+        lsp_action("type_definitions"),
+        get_opts({ desc = "Go to type definition" }),
+      },
+      {
+        "gr",
+        lsp_action("references"),
+        get_opts({ desc = "Show references" }),
+      },
+    })
   end
 })
 
@@ -138,7 +155,7 @@ require("lspconfig").lua_ls.setup({
         version = 'LuaJIT'
       },
       diagnostics = {
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         library = {

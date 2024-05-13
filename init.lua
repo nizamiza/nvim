@@ -12,14 +12,22 @@ local cs = require("colorscheme")
 -- Base configuration
 require("options")
 require("statusline")
-require("remaps")
+require("keymaps")
 require("user_commands")
 
 -- Initialize the plugin manager and plugins
 require("rpm")
 require("rpm.interface").setup({
   after_init = function()
-    cs.set_colorscheme()
     require("lsp")
+
+    cs.set_colorscheme()
+    require("ibl").setup({
+      indent = {
+        char = "▏",
+        tab_char = "▏",
+        highlight = { "Conceal" }
+      }
+    })
   end
 })

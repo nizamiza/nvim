@@ -1,4 +1,4 @@
-local helpers = require("helpers")
+local utils = require("utils")
 
 return {
   "ThePrimeagen/harpoon",
@@ -6,46 +6,56 @@ return {
     local harpoon_ui = require("harpoon.ui")
     local harpoon_mark = require("harpoon.mark")
 
-    helpers.set_keymap(
-      "<leader>hl",
-      function()
-        harpoon_ui.toggle_quick_menu()
-      end,
-      { desc = "Toggle Harpoon menu" }
-    )
-
-    helpers.set_keymap(
-      "<leader>ha",
-      function()
-        harpoon_mark.add_file()
-      end,
-      { desc = "Harpoon the current file" }
-    )
-
-    helpers.set_keymap(
-      "<leader>hp",
-      function()
-        harpoon_ui.nav_prev()
-      end,
-      { desc = "Navigate to previous Harpoon mark" }
-    )
-
-    helpers.set_keymap(
-      "<leader>hn",
-      function()
-        harpoon_ui.nav_next()
-      end,
-      { desc = "Navigate to next Harpoon mark" }
-    )
-
-    for index, key in ipairs({"+", "ľ", "š"}) do
-      helpers.set_keymap(
-        "<leader>" .. key,
+    utils.set_keymaps({
+      {
+        "<leader>hl",
         function()
-          harpoon_ui.nav_file(index)
+          harpoon_ui.toggle_quick_menu()
         end,
-        { desc = "Navigate to Harpoon mark " .. index }
-      )
-    end
+        { desc = "Toggle Harpoon menu" }
+      },
+      {
+        "<leader>ha",
+        function()
+          harpoon_mark.add_file()
+        end,
+        { desc = "Harpoon the current file" }
+      },
+      {
+        "<leader>hp",
+        function()
+          harpoon_ui.nav_prev()
+        end,
+        { desc = "Navigate to previous Harpoon mark" }
+      },
+      {
+        "<leader>hn",
+        function()
+          harpoon_ui.nav_next()
+        end,
+        { desc = "Navigate to next Harpoon mark" }
+      },
+      {
+        "<leader>+",
+        function()
+          harpoon_ui.nav_file(1)
+        end,
+        { desc = "Navigate to Harpoon mark 1" }
+      },
+      {
+        "<leader>ľ",
+        function()
+          harpoon_ui.nav_file(2)
+        end,
+        { desc = "Navigate to Harpoon mark 2" }
+      },
+      {
+        "<leader>š",
+        function()
+          harpoon_ui.nav_file(3)
+        end,
+        { desc = "Navigate to Harpoon mark 3" }
+      }
+    })
   end
 }
