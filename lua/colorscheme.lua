@@ -51,19 +51,21 @@ function M.set_statusline_colorscheme(wday, bg_color)
   wday = wday or os.date("*t").wday
   bg_color = bg_color or vim.o.background
 
-  if type(wday) == "string" then
-    for index, day in ipairs(M.weekdays) do
-      if day == wday then
-        wday = index
-        break
-      end
+  for index, day in ipairs(M.weekdays) do
+    if day == wday then
+      wday = index
+      break
     end
+  end
+
+  if type(wday) == "string" then
+    return
   end
 
   local statusline_cs = M.color_scheme.statusline[bg_color]
 
   local fg = statusline_cs.guifg
-  local bg = statusline_cs.guibg[wday % #statusline_cs.guibg + 1]
+  local bg = statusline_cs.guibg[wday]
 
   vim.cmd("hi StatusLine guifg=" .. fg .. " guibg=" .. bg)
 end
