@@ -1,4 +1,4 @@
-local utils = require("utils")
+local Utils = require("utils")
 
 return {
   {
@@ -6,7 +6,7 @@ return {
     "nvim-telescope/telescope.nvim"
   },
   function()
-    local builtin = require("telescope.builtin")
+    local TelescopeBuiltin = require("telescope.builtin")
 
     require("telescope").setup({
       defaults = {
@@ -14,45 +14,45 @@ return {
       },
     })
 
-    utils.set_keymaps({
+    Utils.set_keymaps({
       {
         "<leader>fp",
-        builtin.find_files,
+        TelescopeBuiltin.find_files,
         { desc = "Find project files" }
       },
       {
         "<leader>lg",
-        builtin.live_grep,
+        TelescopeBuiltin.live_grep,
         { desc = "Live grep" }
       },
       {
         "<leader>bl",
-        builtin.buffers,
+        TelescopeBuiltin.buffers,
         { desc = "Buffer list" }
       },
       {
         "<leader>ht",
-        builtin.help_tags,
+        TelescopeBuiltin.help_tags,
         { desc = "Help tags" }
       },
       {
         "<leader>sr",
-        builtin.resume,
+        TelescopeBuiltin.resume,
         { desc = "Resume previous search" }
       },
       {
         "<leader>of",
-        builtin.oldfiles,
+        TelescopeBuiltin.oldfiles,
         { desc = "Old files" }
       },
       {
         "<leader>gi",
-        builtin.git_status,
+        TelescopeBuiltin.git_status,
         { desc = "Git info" }
       },
       {
         "<leader>gc",
-        builtin.git_commits,
+        TelescopeBuiltin.git_commits,
         { desc = "Git commits" }
       }
     })

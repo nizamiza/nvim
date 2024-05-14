@@ -1,10 +1,10 @@
-local cs = require("colorscheme")
+local ColorScheme = require("colorscheme")
 
 local function change_statusline_colorscheme(opts)
   local wday = opts.fargs[1]
   local bg_color = opts.fargs[2]
 
-  cs.set_statusline_colorscheme(wday, bg_color)
+  ColorScheme.set_statusline_colorscheme(wday, bg_color)
 end
 
 local function delete_other_buffers(opts)
@@ -77,7 +77,7 @@ vim.api.nvim_create_user_command(
         return { "dark", "light" }
       end
 
-      return cs.weekdays
+      return ColorScheme.weekdays
     end
   }
 )

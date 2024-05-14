@@ -1,9 +1,9 @@
-local utils = require("utils")
+local Utils = require("utils")
 
 return {
   "prettier/vim-prettier",
   function()
-    local autocomplete = require("rpm.autocomplete")
+    local RpmAutocomplete = require("rpm.autocomplete")
 
     local parser_select_options = {
       "typescript",
@@ -17,8 +17,8 @@ return {
       "html"
     }
 
-    utils.set_global_option("prettier#autoformat", 1)
-    utils.set_global_option("prettier#autoformat_require_pragma", 0)
+    Utils.set_global_option("prettier#autoformat", 1)
+    Utils.set_global_option("prettier#autoformat_require_pragma", 0)
 
     -- cmd for formatting the current line or visual selection
     vim.api.nvim_create_user_command(
@@ -77,7 +77,7 @@ return {
         range = true,
         desc = "Format the current line or visual selection with Prettier",
         complete = function(arg_lead)
-          return autocomplete.narrow_options(parser_select_options, arg_lead)
+          return RpmAutocomplete.narrow_options(parser_select_options, arg_lead)
         end
       }
     )

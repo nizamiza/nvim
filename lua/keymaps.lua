@@ -1,6 +1,6 @@
-local utils = require("utils")
+local Utils = require("utils")
 
-utils.set_keymaps({
+Utils.set_keymaps({
   {
     "<esc>",
     "<cmd>noh<cr>",

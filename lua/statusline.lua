@@ -1,22 +1,22 @@
-local utils = require("utils")
+local Utils = require("utils")
 
 -- Source:
 -- https://www.reddit.com/r/neovim/comments/uz3ofs/heres_a_function_to_grab_the_name_of_the_current/
 -- Credit goes to the user: HarmonicAscendant
 
-local init_statusline = vim.api.nvim_create_augroup("init_statusline", {})
+local statusline_augroup = vim.api.nvim_create_augroup("statusline", {})
 
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "FocusGained" }, {
   desc = "Get current Git branch",
   callback = function()
     if vim.fn.isdirectory(".git") ~= 0 then
       local branch = vim.fn.system("git branch --show-current | tr -d '\n'")
-      utils.set_global_option("git_branch_name", " " .. branch .. " ")
+      Utils.set_global_option("git_branch_name", " " .. branch .. " ")
     else
-      utils.set_global_option("git_branch_name", " ")
+      Utils.set_global_option("git_branch_name", " ")
     end
   end,
-  group = init_statusline,
+  group = statusline_augroup,
 })
 
 function GetStatusLine()
@@ -24,4 +24,4 @@ function GetStatusLine()
 end
 
 -- Set the statusline
-utils.set_option("statusline", "%{%v:lua.GetStatusLine()%}")
+Utils.set_option("statusline", "%{%v:lua.GetStatusLine()%}")

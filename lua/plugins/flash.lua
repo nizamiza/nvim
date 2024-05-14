@@ -1,4 +1,4 @@
-local utils = require("utils")
+local Utils = require("utils")
 
 return {
   "folke/flash.nvim",
@@ -11,7 +11,7 @@ return {
       end
     end
 
-    utils.set_keymaps({
+    Utils.set_keymaps({
       {
         "s",
         exec_flash("jump"),

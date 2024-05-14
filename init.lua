@@ -7,7 +7,9 @@ vim.g.adaptive_colorscheme = vim.tbl_contains(
   os.getenv("TERM_PROGRAM")
 )
 
-local cs = require("colorscheme")
+local ColorScheme = require("colorscheme")
+
+ColorScheme.set_transparent_background()
 
 -- Base configuration
 require("options")
@@ -21,7 +23,7 @@ require("rpm.interface").setup({
   after_init = function()
     require("lsp")
 
-    cs.set_colorscheme()
+    ColorScheme.set_colorscheme()
     require("ibl").setup({
       indent = {
         char = "▏",

@@ -4,20 +4,26 @@
 -- https://lsp-zero.netlify.app/v3.x/blog/you-might-not-need-lsp-zero.html
 --
 
-local utils = require("utils")
-local telescope = require("telescope.builtin")
+local Utils = require("utils")
+local Telescope = require("telescope.builtin")
 
 -- Global LSP keybindings
-utils.set_keymap("gl", "<cmd>lua vim.diagnostic.open_float()<cr>", {
-  desc = "Open diagnostic float"
-})
-
-utils.set_keymap("úd", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {
-  desc = "Go to previous diagnostic"
-})
-
-utils.set_keymap("äd", "<cmd>lua vim.diagnostic.goto_next()<cr>", {
-  desc = "Go to next diagnostic"
+Utils.set_keymaps({
+  {
+    "gl",
+    "<cmd>lua vim.diagnostic.open_float()<cr>",
+    { desc = "Open diagnostic float" }
+  },
+  {
+    "úd",
+    "<cmd>lua vim.diagnostic.goto_prev()<cr>",
+    { desc = "Go to previous diagnostic" }
+  },
+  {
+    "äd",
+    "<cmd>lua vim.diagnostic.goto_next()<cr>",
+    { desc = "Go to next diagnostic" }
+  },
 })
 
 local function lsp_keymap_opts_factory(event)
@@ -30,7 +36,7 @@ local function telescope_lsp_action_factory()
   return function(action)
     local action_name = "lsp_" .. action
     return function()
-      telescope[action_name]()
+      Telescope[action_name]()
     end
   end
 end
@@ -42,7 +48,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local get_opts = lsp_keymap_opts_factory(event)
     local lsp_action = telescope_lsp_action_factory()
 
-    utils.set_keymaps({
+    Utils.set_keymaps({
       {
         "<leader>r",
         "<cmd>lua vim.lsp.buf.rename()<cr>",

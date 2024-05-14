@@ -1,4 +1,4 @@
-local utils = require("utils")
+local Utils = require("utils")
 
 local M = {}
 
@@ -47,6 +47,10 @@ M.weekdays = {
 local init_colorscheme = vim.api.nvim_create_augroup("init_colorscheme", {})
 local adaptive_colorscheme = vim.g.adaptive_colorscheme
 
+function M.set_transparent_background()
+  vim.cmd("hi Normal guibg=NONE")
+end
+
 function M.set_statusline_colorscheme(wday, bg_color)
   wday = wday or os.date("*t").wday
   bg_color = bg_color or vim.o.background
@@ -73,7 +77,7 @@ end
 function M.set_colorscheme(bg_color)
   bg_color = bg_color or vim.o.background
 
-  utils.set_option("background", bg_color)
+  Utils.set_option("background", bg_color)
   vim.cmd("colorscheme " .. M.color_scheme[bg_color])
 
   M.set_statusline_colorscheme()
@@ -95,7 +99,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained" }, {
   end
 })
 
-utils.set_option("termguicolors", true)
+Utils.set_option("termguicolors", true)
 
 if not adaptive_colorscheme then
   M.set_colorscheme("dark")
