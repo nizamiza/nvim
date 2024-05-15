@@ -20,10 +20,5 @@ Utils.set_keymaps({
     "<leader>w",
     "<cmd>set wrap!<cr>",
     { desc = "Toggle soft wrap" }
-  },
-  {
-    "<leader>e",
-    "<cmd>Explore<cr>",
-    { desc = "Invoke netrw" }
   }
 })
