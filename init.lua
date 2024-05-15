@@ -7,6 +7,13 @@ vim.g.adaptive_colorscheme = vim.tbl_contains(
   os.getenv("TERM_PROGRAM")
 )
 
+local oil_installed, oil = pcall(require, "oil")
+
+if oil_installed then
+  oil.setup({ deafult_file_explorer = true })
+end
+
+-- Open Oil when opening neovim in a directory
 local ColorScheme = require("colorscheme")
 
 ColorScheme.set_transparent_background()

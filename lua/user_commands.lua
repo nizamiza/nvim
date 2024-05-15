@@ -14,7 +14,7 @@ local function delete_other_buffers(opts)
 
   local count = 0
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if buf == current_buf then
+    if buf == current_buf or not vim.api.nvim_buf_is_loaded(buf) then
       goto continue
     end
 

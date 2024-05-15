@@ -35,6 +35,11 @@ end
 local function telescope_lsp_action_factory()
   return function(action)
     local action_name = "lsp_" .. action
+
+    if not Telescope[action_name] then
+      action_name = action
+    end
+
     return function()
       Telescope[action_name]()
     end
@@ -98,6 +103,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
         "gr",
         lsp_action("references"),
         get_opts({ desc = "Show references" }),
+      },
+      {
+        "<leader>df",
+        lsp_action("diagnostics"),
+        get_opts({ desc = "Show diagnostics" }),
+      },
+      {
+        "<leader>ds",
+        lsp_action("document_symbols"),
+        get_opts({ desc = "Show document symbols" }),
+      },
+      {
+        "<leader>ws",
+        lsp_action("workspace_symbols"),
+        get_opts({ desc = "Show workspace symbols" }),
       },
     })
   end
@@ -170,4 +190,17 @@ require("lspconfig").lua_ls.setup({
       }
     }
   }
+})
+
+-- Format on save
+local lsp_format_augroup = vim.api.nvim_create_augroup("LspFormat", {})
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = lsp_format_augroup,
+  desc = "Format on save",
+  callback = function(event)
+    vim.lsp.buf.format({
+      bufnr = event.buf,
+    })
+  end
 })
