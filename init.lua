@@ -1,21 +1,20 @@
 -- Always load plugins
 vim.cmd("packloadall")
 
+-- Oil - better file explorer
+local oil_installed, oil = pcall(require, "oil")
+
+if oil_installed then
+  oil.setup()
+end
+
 -- Colorscheme
 vim.g.adaptive_colorscheme = vim.tbl_contains(
   { "WezTerm" },
   os.getenv("TERM_PROGRAM")
 )
 
-local oil_installed, oil = pcall(require, "oil")
-
-if oil_installed then
-  oil.setup({ deafult_file_explorer = true })
-end
-
--- Open Oil when opening neovim in a directory
 local ColorScheme = require("colorscheme")
-
 ColorScheme.set_transparent_background()
 
 -- Base configuration
@@ -29,14 +28,6 @@ require("rpm")
 require("rpm.interface").setup({
   after_init = function()
     require("lsp")
-
     ColorScheme.set_colorscheme()
-    require("ibl").setup({
-      indent = {
-        char = "▏",
-        tab_char = "▏",
-        highlight = { "Conceal" }
-      }
-    })
   end
 })
