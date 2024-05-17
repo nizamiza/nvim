@@ -5,7 +5,6 @@ require("rpm_init").setup()
 require("oil").setup()
 
 -- Load the rest of the configuration
-require("lsp")
 require("colorscheme")
 require("options")
 require("keymaps")

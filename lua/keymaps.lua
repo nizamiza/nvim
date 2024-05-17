@@ -24,4 +24,14 @@ Utils.register_keymaps({
     name = "toggle",
     w = { "<cmd>set wrap!<cr>", "Toggle soft wrap" },
   },
+  w = {
+    name = "window",
+    s = { "<cmd>split<cr>", "Split window" },
+    v = { "<cmd>vsplit<cr>", "Vsplit window" },
+    c = { "<cmd>close<cr>", "Close window" },
+    ["<up>"] = { "<c-w><up>", "Move to the top window" },
+    ["<right>"] = { "<c-w><right>", "Move to the right window" },
+    ["<down>"] = { "<c-w><down>", "Move to the bottom window" },
+    ["<left>"] = { "<c-w><left>", "Move to the left window" },
+  },
 }, { prefix = "<leader>" })

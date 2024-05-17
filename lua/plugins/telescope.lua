@@ -27,7 +27,6 @@ return {
         c = { "<cmd>Telescope git_commits<cr>", "Git commits" },
         b = { "<cmd>Telescope git_branches<cr>", "Git branches" },
         s = { "<cmd>Telescope git_stash<cr>", "Git stash" },
-        l = { "<cmd>Telescope git_bcommits<cr>", "Git bcommits" },
       },
       h = {
         name = "help",
