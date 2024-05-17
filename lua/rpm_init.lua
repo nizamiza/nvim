@@ -14,6 +14,8 @@ if vim.fn.isdirectory(install_path) == 0 then
   })
 
   vim.notify("RPM installed.")
+
+  vim.cmd("packadd rpm")
   require("rpm").install_all()
 end
 
