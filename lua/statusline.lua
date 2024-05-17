@@ -11,7 +11,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "FocusGained" }, {
   callback = function()
     if vim.fn.isdirectory(".git") ~= 0 then
       local branch = vim.fn.system("git branch --show-current | tr -d '\n'")
-      Utils.set_global_option("git_branch_name", " " .. branch .. " ")
+
+      if branch ~= nil then
+        Utils.set_global_option("git_branch_name", " " .. branch .. " ")
+      end
     else
       Utils.set_global_option("git_branch_name", " ")
     end
@@ -20,7 +23,8 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "FocusGained" }, {
 })
 
 function GetStatusLine()
-  return vim.g.git_branch_name .. "%f %r %m %= %y %l/%L %p%% %c "
+  local branch = vim.g.git_branch_name or ""
+  return branch .. "%f %r %m %= %y %l/%L %p%% %c "
 end
 
 -- Set the statusline

@@ -5,121 +5,38 @@
 --
 
 local Utils = require("utils")
-local Telescope = require("telescope.builtin")
-
--- Global LSP keybindings
-Utils.set_keymaps({
-  {
-    "gl",
-    "<cmd>lua vim.diagnostic.open_float()<cr>",
-    { desc = "Open diagnostic float" }
-  },
-  {
-    "úd",
-    "<cmd>lua vim.diagnostic.goto_prev()<cr>",
-    { desc = "Go to previous diagnostic" }
-  },
-  {
-    "äd",
-    "<cmd>lua vim.diagnostic.goto_next()<cr>",
-    { desc = "Go to next diagnostic" }
-  },
-})
-
-local function lsp_keymap_opts_factory(event)
-  return function(opts)
-    return vim.tbl_extend("force", { buffer = event.buf }, opts or {})
-  end
-end
-
-local function telescope_lsp_action_factory()
-  return function(action)
-    local action_name = "lsp_" .. action
-
-    if not Telescope[action_name] then
-      action_name = action
-    end
-
-    return function()
-      Telescope[action_name]()
-    end
-  end
-end
 
 -- LSP actions
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = "LSP actions",
-  callback = function(event)
-    local get_opts = lsp_keymap_opts_factory(event)
-    local lsp_action = telescope_lsp_action_factory()
-
-    Utils.set_keymaps({
-      {
-        "<leader>r",
-        "<cmd>lua vim.lsp.buf.rename()<cr>",
-        get_opts({ desc = "Rename symbol" }),
-      },
-      {
-        "<leader>L",
-        "<cmd>lua vim.lsp.buf.format({ async = true })<cr>",
-        get_opts({ desc = "Format document" }),
-      },
-      {
-        "ca",
-        "<cmd>lua vim.lsp.buf.code_action()<cr>",
-        get_opts({ desc = "Show code actions" }),
-      },
-      {
-        "K",
-        "<cmd>lua vim.lsp.buf.hover()<cr>",
-        get_opts({ desc = "Show hover information" }),
-      },
-      {
-        "gs",
-        "<cmd>lua vim.lsp.buf.signature_help()<cr>",
-        get_opts({ desc = "Show signature help" }),
-      },
-      {
-        "gD",
-        "<cmd>lua vim.lsp.buf.declaration()<cr>",
-        get_opts({ desc = "Go to declaration" }),
-      },
-      {
-        "gd",
-        lsp_action("definitions"),
-        get_opts({ desc = "Go to definition" }),
-      },
-      {
-        "gi",
-        lsp_action("implementations"),
-        get_opts({ desc = "Go to implementation" }),
-      },
-      {
-        "go",
-        lsp_action("type_definitions"),
-        get_opts({ desc = "Go to type definition" }),
-      },
-      {
-        "gr",
-        lsp_action("references"),
-        get_opts({ desc = "Show references" }),
-      },
-      {
-        "<leader>df",
-        lsp_action("diagnostics"),
-        get_opts({ desc = "Show diagnostics" }),
-      },
-      {
-        "<leader>ds",
-        lsp_action("document_symbols"),
-        get_opts({ desc = "Show document symbols" }),
-      },
-      {
-        "<leader>ws",
-        lsp_action("workspace_symbols"),
-        get_opts({ desc = "Show workspace symbols" }),
-      },
+  callback = function()
+    Utils.register_keymaps({
+      K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Show hover information" },
+      D = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Open diagnostic float" },
     })
+
+    Utils.register_keymaps({
+      l = {
+        name = "LSP",
+        a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code actions" },
+        d = { "<cmd>Telescope lsp_definitions<cr>", "Definitions" },
+        D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Declaration" },
+        r = { "<cmd>Telescope lsp_references<cr>", "References" },
+        i = { "<cmd>Telescope lsp_implementations<cr>", "Implementations" },
+        t = { "<cmd>Telescope lsp_type_definitions<cr>", "Type definitions" },
+        S = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Show signature help" },
+        R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename symbol under cursor" },
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
+        w = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace symbols" },
+        f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format document" },
+      },
+      d = {
+        name = "diagnostics",
+        l = { "<cmd>Telescope diagnostics<cr>", "Document diagnostics" },
+        n = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next diagnostic" },
+        p = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Previous diagnostic" },
+      },
+    }, { prefix = "<leader>" })
   end
 })
 

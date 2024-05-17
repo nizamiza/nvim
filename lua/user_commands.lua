@@ -19,7 +19,9 @@ local function delete_other_buffers(opts)
     end
 
     local bufname = vim.api.nvim_buf_get_name(buf)
-    local unsaved_changes = vim.api.nvim_buf_get_option(buf, "modified")
+    local unsaved_changes = vim.api.nvim_get_option_value("modified", {
+      buf = buf
+    })
 
     if unsaved_changes and not force then
       local choice = vim.fn.confirm(

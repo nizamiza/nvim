@@ -1,42 +1,18 @@
-local Utils = require("utils")
-
 return {
   "folke/flash.nvim",
   function()
-    local flash = require("flash")
-
-    local function exec_flash(cmd)
+    local function flash(cmd)
       return function()
-        flash[cmd]()
+        require("flash")[cmd]()
       end
     end
 
-    Utils.set_keymaps({
-      {
-        "s",
-        exec_flash("jump"),
-        { mode = { "n", "x", "o" }, desc = "Flash" },
-      },
-      {
-        "S",
-        exec_flash("treesitter"),
-        { mode = { "n", "x", "o" }, desc = "Flash Treesitter" },
-      },
-      {
-        "r",
-        exec_flash("remote"),
-        { mode = { "o" }, desc = "Remote Flash" },
-      },
-      {
-        "r",
-        exec_flash("treesitter_search"),
-        { mode = { "x", "o" }, desc = "Treesitter search" },
-      },
-      {
-        "<c-s>",
-        exec_flash("toggle"),
-        { mode = { "c" }, desc = "Toggle Flash search" },
-      },
+    require("utils").register_keymaps({
+      s = { flash("jump"), "Flash", mode = { "n", "x", "o" } },
+      S = { flash("treesitter"), "Flash Treesitter", mode = { "n", "x", "o" } },
+      r = { flash("remote"), "Remote Flash", mode = "o" },
+      R = { flash("treesitter_search"), "Treesitter search", mode = { "x", "o" } },
+      ["<c-s>"] = { flash("toggle"), "Toggle Flash search", mode = "c" },
     })
   end
 }

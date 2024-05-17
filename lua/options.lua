@@ -1,7 +1,9 @@
 local Utils = require("utils")
 
-Utils.set_global_option("mapleader", " ")
-Utils.set_global_option("maplocalleader", " ")
+local leader = " "
+
+Utils.set_global_option("mapleader", leader)
+Utils.set_global_option("maplocalleader", leader)
 
 Utils.set_options({
   clipboard = "unnamedplus",

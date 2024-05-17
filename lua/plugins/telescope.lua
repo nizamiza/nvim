@@ -1,60 +1,48 @@
-local Utils = require("utils")
-
 return {
   {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim"
   },
   function()
-    local TelescopeBuiltin = require("telescope.builtin")
-
     require("telescope").setup({
       defaults = {
         layout_strategy = "vertical",
       },
     })
 
-    Utils.set_keymaps({
-      {
-        "<leader>fp",
-        TelescopeBuiltin.find_files,
-        { desc = "Find project files" }
+    require("utils").register_keymaps({
+      f = {
+        name = "file",
+        p = { "<cmd>Telescope find_files<cr>", "Find file" },
+        o = { "<cmd>Telescope oldfiles<cr>", "Recently opened" },
+        r = { "<cmd>Telescope resume<cr>", "Resume last search" },
       },
-      {
-        "<leader>lg",
-        TelescopeBuiltin.live_grep,
-        { desc = "Live grep" }
+      b = {
+        name = "buffer",
+        l = { "<cmd>Telescope buffers<cr>", "List buffers" },
       },
-      {
-        "<leader>bl",
-        TelescopeBuiltin.buffers,
-        { desc = "Buffer list" }
+      g = {
+        name = "git",
+        i = { "<cmd>Telescope git_status<cr>", "Git status" },
+        c = { "<cmd>Telescope git_commits<cr>", "Git commits" },
+        b = { "<cmd>Telescope git_branches<cr>", "Git branches" },
+        s = { "<cmd>Telescope git_stash<cr>", "Git stash" },
+        l = { "<cmd>Telescope git_bcommits<cr>", "Git bcommits" },
       },
-      {
-        "<leader>ht",
-        TelescopeBuiltin.help_tags,
-        { desc = "Help tags" }
+      h = {
+        name = "help",
+        t = { "<cmd>Telescope help_tags<cr>", "Help tags" },
+        c = { "<cmd>Telescope commands<cr>", "Commands" },
       },
-      {
-        "<leader>sr",
-        TelescopeBuiltin.resume,
-        { desc = "Resume previous search" }
+      s = {
+        name = "search",
+        b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search buffer" },
+        h = { "<cmd>Telescope command_history<cr>", "Command history" },
+        m = { "<cmd>Telescope marks<cr>", "Marks" },
+        r = { "<cmd>Telescope registers<cr>", "Registers" },
+        s = { "<cmd>Telescope search_history<cr>", "Search history" },
+        g = { "<cmd>Telescope live_grep<cr>", "Grep string" },
       },
-      {
-        "<leader>of",
-        TelescopeBuiltin.oldfiles,
-        { desc = "Old files" }
-      },
-      {
-        "<leader>gi",
-        TelescopeBuiltin.git_status,
-        { desc = "Git info" }
-      },
-      {
-        "<leader>gc",
-        TelescopeBuiltin.git_commits,
-        { desc = "Git commits" }
-      }
-    })
+    }, { prefix = "<leader>" })
   end
 }
