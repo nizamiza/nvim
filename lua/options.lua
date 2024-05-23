@@ -8,7 +8,6 @@ Utils.set_global_option("maplocalleader", leader)
 Utils.set_options({
   clipboard = "unnamedplus",
   number = true,
-  relativenumber = true,
   tabstop = 2,
   shiftwidth = 2,
   expandtab = true,
